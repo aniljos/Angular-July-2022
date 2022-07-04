@@ -1,11 +1,11 @@
 console.log("in one.ts module");
-function add() {
+export function add() {
     console.log("in one.js add");
 }
-function multiply() {
+export function multiply() {
     console.log("in one.js multiply");
 }
-function calc() {
+export function calc() {
     console.log("in one.js calc");
 }
 //exports a function

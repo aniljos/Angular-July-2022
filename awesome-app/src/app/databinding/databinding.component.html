@@ -1,0 +1,18 @@
+<h3>Data Binding</h3>
+
+<h4>Name: {{name}}</h4>
+<h4>Count: {{count}}</h4>
+
+<div>
+    <input [placeholder]="ctrPlaceHolder" 
+                type="number" [value]="count"/>
+</div>
+<br/>
+<div>
+    <button (click)="inc($event);">Increment</button>
+</div>
+
+<br/>
+<div>
+    <input placeholder="Name" [(ngModel)]="name"/>
+</div>
