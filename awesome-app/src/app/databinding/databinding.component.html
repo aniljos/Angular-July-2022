@@ -1,18 +1,32 @@
 <h3>Data Binding</h3>
 
-<h4>Name: {{name}}</h4>
-<h4>Count: {{count}}</h4>
-
 <div>
-    <input [placeholder]="ctrPlaceHolder" 
-                type="number" [value]="count"/>
+    Show/Hide Content: <input type="checkbox" [(ngModel)]="isPanelVisible"/>
+</div>
+<div [hidden]="!isPanelVisible">
+    <h4>Name: {{name}}</h4>
+    <h4>Count: {{count}}</h4>
+
+    <div>
+        <input [placeholder]="ctrPlaceHolder" 
+                    type="number" [value]="count"/>
+    </div>
+    <br/>
+    <div>
+        <button (click)="inc($event);">Increment</button>
+    </div>
+</div>
+
+<br/>
+<div>
+    
+    <input placeholder="Name" 
+         [(ngModel)]="name" [ngModelOptions]="{updateOn: 'change'}"/>
 </div>
 <br/>
 <div>
-    <button (click)="inc($event);">Increment</button>
-</div>
-
-<br/>
-<div>
-    <input placeholder="Name" [(ngModel)]="name"/>
+    <input type="number" 
+            placeholder="Count" 
+            [value]="count"
+            (input) ="count=$any($event).target.value"/>
 </div>
