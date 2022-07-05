@@ -12,6 +12,8 @@ export class DataBindingComponent{
     public isPanelVisible: boolean;
 
     constructor(){
+
+        
         this.name = "Anil Joseph";
         this.count = 10;
         this.ctrPlaceHolder= "The Count";

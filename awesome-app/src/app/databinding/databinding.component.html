@@ -17,16 +17,22 @@
     </div>
 </div>
 
-<br/>
 <div>
-    
-    <input placeholder="Name" 
-         [(ngModel)]="name" [ngModelOptions]="{updateOn: 'change'}"/>
+    <!-- var element = document.getElementById("..."); -->
+    Show/Hide NgModel Content: <input type="checkbox" #element [ngModel]/>{{element.checked}}
 </div>
-<br/>
-<div>
-    <input type="number" 
-            placeholder="Count" 
-            [value]="count"
-            (input) ="count=$any($event).target.value"/>
+<div [hidden]="!element.checked">
+    <br/>
+    <div>
+        
+        <input placeholder="Name" 
+            [(ngModel)]="name" [ngModelOptions]="{updateOn: 'change'}"/>
+    </div>
+    <br/>
+    <div>
+        <input type="number" 
+                placeholder="Count" 
+                [value]="count"
+                (input) ="count=$any($event).target.value"/>
+    </div>
 </div>
