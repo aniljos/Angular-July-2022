@@ -48,7 +48,7 @@
 ### Template
 
 1. Template is compiled and converted a View
-2. In Angular 1.x this compilation happes in the browser
+2. In Angular 1.x this compilation happen in the browser
 3. Angular 2 onwards has the AOT Compilation
 4. Angular 8 introduced the Ivy compiler
 

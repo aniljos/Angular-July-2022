@@ -1,4 +1,7 @@
+
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import {Product} from "../../model/product";
 
 @Component({
   selector: 'app-list-products',
@@ -7,8 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListProductsComponent implements OnInit {
 
-  constructor() { }
+ 
+  public data: Array<Product>;
+  public searchKey: string = "";
 
+  constructor(private httpClient: HttpClient) {
+      
+    this.data = new Array<Product>();
+    
+    const url = "http://localhost:9000/products";
+    this.httpClient
+              .get<Array<Product>>(url)
+              .subscribe((data) => {
+                console.log("data", data);
+                this.data = data;
+              });
+
+   }
   ngOnInit(): void {
   }
 

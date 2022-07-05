@@ -1,1 +1,31 @@
-<p>list-products works!</p>
+
+<h3>List of Products</h3>
+
+<div>
+    <input placeholder="Search" [(ngModel)]="searchKey"/>
+</div>
+<br/>
+<p *ngIf="searchKey" >
+    Search results for {{searchKey}}
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of data; index as i; even as even; odd as odd" 
+                            [ngClass]="{oddCls: odd, evenCls: even}">
+            <td>{{i}}</td>
+            <td>{{product.id}}</td>
+            <td>{{product.name | uppercase}}</td>
+            <td>{{product.price | currency : 'Rs.'}}</td>
+            <td>{{product.description}}</td>
+        </tr>
+    </tbody>
+</table>
