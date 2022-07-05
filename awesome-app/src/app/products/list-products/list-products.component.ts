@@ -13,6 +13,7 @@ export class ListProductsComponent implements OnInit {
  
   public data: Array<Product>;
   public searchKey: string = "";
+  public nProduct: Product = new Product();
 
   constructor(private httpClient: HttpClient) {
       
@@ -28,6 +29,13 @@ export class ListProductsComponent implements OnInit {
 
    }
   ngOnInit(): void {
+  }
+
+  saveProduct(){
+
+    this.data.push(this.nProduct);
+    this.nProduct = new Product();
+
   }
 
 }
