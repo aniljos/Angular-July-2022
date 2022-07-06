@@ -16,6 +16,8 @@ export class EditProductComponent implements OnInit, OnChanges{
 
   @Output()
   public cancelled: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  public saved: EventEmitter<Product> = new EventEmitter<Product>();
 
   constructor() {
 
@@ -44,6 +46,8 @@ export class EditProductComponent implements OnInit, OnChanges{
 
   save(){
     ///Object.assign(this.product, this.temp);
+
+    this.saved.emit(this.temp);
   }
 
   cancel(){

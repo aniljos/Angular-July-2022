@@ -55,4 +55,14 @@ export class ListProductsComponent implements OnInit {
 
   }
 
+  editUpdated(updatedProduct: Product){
+
+    const index = this.data.findIndex(item => item.id === updatedProduct.id);
+    if(index !== -1){
+      this.data[index] = updatedProduct;
+      this.selectedProduct = null;
+    }
+
+  }
+
 }
