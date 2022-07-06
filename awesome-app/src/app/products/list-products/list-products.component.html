@@ -28,7 +28,7 @@
             <td>{{product.price | currency : 'Rs.'}}</td>
             <td>{{product.description}}</td>
             <td>
-                <button>Edit</button> &nbsp;
+                <button (click)="editProduct(product)">Edit</button> &nbsp;
                 <button>Delete</button>
             </td>
         </tr>
@@ -56,4 +56,6 @@
   New product(for debugging)  {{nProduct | json}}
 </div>
 
-<app-edit-product></app-edit-product>
+<app-edit-product *ngIf="selectedProduct"
+    [product]="selectedProduct" (cancelled)="editCancelled($event)" 
+    ></app-edit-product>

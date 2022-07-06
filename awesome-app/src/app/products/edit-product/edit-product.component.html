@@ -1,31 +1,27 @@
 <div>
-    <h4>Edit Product of ID: </h4>
+    <h4>Edit Product of ID: {{product.id}}</h4>
     <fieldset>
         <div>
             <label>Name</label>
             <div>
-                <input type="text" placeholder="Name"/>
+                <input type="text" placeholder="Name" [(ngModel)]="temp.name"/>
             </div>
         </div> 
         <div>
             <label>Price</label>
             <div>
-                <input type="number" placeholder="Price"/>
+                <input type="number" placeholder="Price" [(ngModel)]="temp.price"/>
             </div>
         </div> 
         <div>
             <label>Description</label>
             <div>
-                <input type="text" placeholder="Desc"/>
+                <input type="text" placeholder="Desc" [(ngModel)]="temp.description"/>
             </div>
         </div> 
         <div>
-            <button>Save</button> &nbsp;
-            <button>Cancel</button>
+            <button (click)="save()">Save</button> &nbsp;
+            <button (click)="cancel()">Cancel</button>
         </div>
-
-
-
-
     </fieldset>
 </div>

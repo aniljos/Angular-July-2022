@@ -15,11 +15,15 @@ export class ListProductsComponent implements OnInit {
   public searchKey: string = "";
   public nProduct: Product = new Product();
 
+  //parentProperty 
+  public selectedProduct: Product | null = null;
+
   constructor(private httpClient: HttpClient) {
       
     this.data = new Array<Product>();
     
     const url = "http://localhost:9000/products";
+    
     this.httpClient
               .get<Array<Product>>(url)
               .subscribe((data) => {
@@ -35,6 +39,19 @@ export class ListProductsComponent implements OnInit {
 
     this.data.push(this.nProduct);
     this.nProduct = new Product();
+
+  }
+
+  editProduct(product: Product){
+
+    this.selectedProduct = product;
+  }
+
+
+  editCancelled(msg: string){
+    
+    alert("editCancelled: " + msg);
+    this.selectedProduct = null;
 
   }
 

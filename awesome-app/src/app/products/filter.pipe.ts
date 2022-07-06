@@ -1,13 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Product } from '../model/product';
 
+// pure: false, impure and the transform method is invoked for every change detection
+// pure: true, pure , the transfroms in invoked only if the parameters change
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure: true
 })
 export class FilterPipe implements PipeTransform {
 
   transform(input: Array<Product>, searchKey: string): Array<Product> {
 
+    console.log("FilterPipe, transform")
     //No search key
     if(!searchKey){
       return input;
