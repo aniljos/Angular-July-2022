@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Product } from '../../model/product';
 
 @Component({
@@ -9,6 +10,8 @@ import { Product } from '../../model/product';
 export class EditProductComponent implements OnInit, OnChanges{
 
 
+  
+ 
   //child property
   @Input()
   public product: Product = new Product();

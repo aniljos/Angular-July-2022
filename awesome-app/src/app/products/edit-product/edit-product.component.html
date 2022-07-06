@@ -2,6 +2,7 @@
   <h4>Edit Product of ID: {{ product.id }}</h4>
 
   <!-- FormGroup -->
+  <!-- #productFormGroup : Template varibale -->
   <form #productFormGroup="ngForm">
     <fieldset>
       <div>
@@ -10,7 +11,10 @@
             <!-- FormControl -->
             <!-- input has a name and the ngModel -->
           <input type="text" placeholder="Name" [(ngModel)]="temp.name" name="pname" 
-                        required pattern="[A-Za-z0-9]{3,}" />
+                        required pattern="([a-zA-Z0-9_]{1,}[ ]{0,}){0,}" #nameCtrl="ngModel"/>
+        </div>
+        <div *ngIf="nameCtrl.invalid" [ngStyle]="{color: 'red'}">
+            This field in required and in the correct format
         </div>
       </div>
       <div>
@@ -18,7 +22,14 @@
         <div>
              <!-- FormControl -->
           <input type="number" placeholder="Price" [(ngModel)]="temp.price" name="pprice" 
-                                        required="" min="100"/>
+                                        required min="100" #priceCtrl="ngModel"/>
+        
+        </div>
+        <div *ngIf="priceCtrl.hasError('required')" [ngStyle]="{color: 'red'}">
+            The field is required
+        </div>
+        <div *ngIf="priceCtrl.hasError('min')" style="color: red;">
+            The minimum value must be 100
         </div>
       </div>
       <div>

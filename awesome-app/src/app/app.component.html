@@ -1,13 +1,37 @@
 <div>
-  <h2>Angular Application</h2>
-  <p>This is a angular application for training</p>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Angular</a>
+      <ul class="nav">
+        <!-- <li class="nav-item">
+          <a class="nav-link active"  href="http://google.com">Google</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link active"  routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="binding">Data Binding</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="gadgets">Gadgets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="search">Search</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 </div>
-
-
-<!-- <hello></hello>
-
-<databinding></databinding> -->
-
-<app-list-products></app-list-products>
 
 
