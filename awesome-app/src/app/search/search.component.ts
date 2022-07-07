@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {interval} from 'rxjs';
+import { interval, Observable, Subject, ReplaySubject, BehaviorSubject } from 'rxjs';
 import {take, tap, map, filter, debounceTime} from 'rxjs/operators';
 
 import {FormGroup, FormControl, Validators} from '@angular/forms';
@@ -13,16 +13,48 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 export class SearchComponent implements OnInit {
 
   public searchFormGroup: FormGroup;
+  public data: Array<string> = new Array<string>();
+
+  public results$: Observable<Array<string>> = new Observable<Array<string>>();
 
   constructor(private httpClient: HttpClient) { 
 
-        //  interval(1000)
+        //  const obs = interval(1000)
         //        .pipe(
         //          take(10),
+        //          tap(x => console.log("in tap", x)),
         //          filter(x => x % 2 === 0),
-        //          map(x => x * x)
+        //          map(x => x * x),
+                 
         //        )
-        //        .subscribe(result => console.log("in subscribe", result));
+
+        //   obs.subscribe(result => console.log("in subscriber #1", result));
+        //   obs.subscribe(result => console.log("in subscriber #2", result));
+
+        //const subject = new Subject<Number>();
+        //const subject = new ReplaySubject<Number>();
+        const subject = new BehaviorSubject<Number>(100);
+
+        let num = 0
+
+        const handle = setInterval(() => {
+
+          subject.next(num++);
+          
+          if(num === 5){
+            subject.subscribe(r => console.log("subscriber2", r));
+          }
+
+          if(num === 15){
+            clearInterval(handle);
+          }
+
+        }, 500);
+
+        subject.subscribe(r => console.log("subscriber1", r));
+
+       
+
       this.searchFormGroup = new FormGroup({
             searchCtrl: new FormControl("", [Validators.required, Validators.minLength(3)], [])
       });
@@ -48,6 +80,7 @@ export class SearchComponent implements OnInit {
                                         .set("limit", 20)
                                         .set("origin", "*")
                     
+                    // Get the body
                     this.httpClient
                             .get(url, {params})
                             .pipe(
@@ -55,8 +88,22 @@ export class SearchComponent implements OnInit {
                             )
                             .subscribe((data) => {
                               console.log(data);
+                              this.data = data;
                             });
-                                         
+
+                    this.results$ = this.httpClient
+                            .get<Array<string>>(url, {params})
+                            .pipe(
+                              map((data: any) => data[1])
+                            );
+                            
+
+
+                    // Get the complete response
+                    // this.httpClient.get(url, {params, observe: 'response'})
+                    //                           .subscribe(resp => console.log(resp));
+
+                    
 
                 });
 
