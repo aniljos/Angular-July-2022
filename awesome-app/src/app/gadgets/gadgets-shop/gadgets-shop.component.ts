@@ -14,19 +14,24 @@ export class GadgetsShopComponent implements OnInit {
 
   constructor(private cartService: CartService) {
 
-      //console.log(cartService.fetchProducts());
-   }
+    //console.log(cartService.fetchProducts());
+  }
 
-   ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
-   
+
     this.fetchProductsFromService();
+
+    
+
+    
+   
 
   }
 
-  async fetchProductsFromService(){
+  async fetchProductsFromService() {
     try {
-      
+
       const products = await this.cartService.fetchProducts();
       console.log("ngOnInit products", products);
       this.products = products;
@@ -36,9 +41,9 @@ export class GadgetsShopComponent implements OnInit {
     }
   }
 
+  add(product: Product, qty: string) {
 
-  add(product:Product, qty: string){
-
+    this.cartService.addToCart(product, Number(qty));
   }
 
 }

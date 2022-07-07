@@ -11,12 +11,15 @@ import { ProductsModule } from './products/products.module';
 import {RouterModule, Routes} from '@angular/router';
 import { RouteNotFoundComponent } from './route-not-found/route-not-found.component';
 import { SearchComponent } from './search/search.component';
+import { LoginComponent } from './login/login.component';
 
 //configure the routes
 const routes: Routes = [
+  
   {path: "home", component: HelloComponent},
   {path: "binding", component: DataBindingComponent},
   {path: "search", component: SearchComponent},
+  {path: "login", component: LoginComponent},
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "**", component: RouteNotFoundComponent}
 ] 
@@ -25,7 +28,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, HelloComponent, DataBindingComponent, RouteNotFoundComponent, SearchComponent
+    AppComponent, HelloComponent, DataBindingComponent, RouteNotFoundComponent, SearchComponent, LoginComponent
   ],
   imports: [
     BrowserModule, 

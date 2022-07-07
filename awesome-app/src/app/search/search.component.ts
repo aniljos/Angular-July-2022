@@ -31,9 +31,9 @@ export class SearchComponent implements OnInit {
         //   obs.subscribe(result => console.log("in subscriber #1", result));
         //   obs.subscribe(result => console.log("in subscriber #2", result));
 
-        //const subject = new Subject<Number>();
+        const subject = new Subject<Number>();
         //const subject = new ReplaySubject<Number>();
-        const subject = new BehaviorSubject<Number>(100);
+        //const subject = new BehaviorSubject<Number>(100);
 
         let num = 0
 

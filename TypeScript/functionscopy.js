@@ -45,3 +45,17 @@ const obj = {
 }
 
 obj.print();
+
+
+var numbers = [1,2,3,4,5,6];
+console.log("numbers", numbers);
+
+var copy = [...numbers];
+console.log("copy", copy);
+
+ numbers.push(7);
+
+ console.log("numbers", numbers);
+ console.log("copy", copy);
+
+
