@@ -12,13 +12,17 @@ import {RouterModule, Routes} from '@angular/router';
 import { RouteNotFoundComponent } from './route-not-found/route-not-found.component';
 import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 //configure the routes
 const routes: Routes = [
   
   {path: "home", component: HelloComponent},
   {path: "binding", component: DataBindingComponent},
-  {path: "search", component: SearchComponent},
+  {path: "search", component: SearchComponent, canActivate: [AuthGuardService]},
   {path: "login", component: LoginComponent},
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "**", component: RouteNotFoundComponent}
@@ -37,7 +41,9 @@ const routes: Routes = [
     GadgetsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

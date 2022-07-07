@@ -6,9 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import {RouterModule, Routes} from '@angular/router';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 const routes: Routes =[
-  {path: "products", component: ListProductsComponent}
+  {path: "products", component: ListProductsComponent, canActivate:[AuthGuardService]}
 ]
 @NgModule({
   declarations: [
