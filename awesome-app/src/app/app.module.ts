@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { TokenInterceptorService } from './token-interceptor.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GadgetsModule } from './gadgets/gadgets.module';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +17,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { authReducer } from './ngrx-store/auth-reducer';
 
 //configure the routes
 const routes: Routes = [
@@ -42,10 +44,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({auth: authReducer}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

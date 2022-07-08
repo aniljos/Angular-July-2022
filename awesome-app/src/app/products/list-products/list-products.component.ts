@@ -1,3 +1,4 @@
+import { environment } from '../../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -17,12 +18,13 @@ export class ListProductsComponent implements OnInit {
 
   //parentProperty 
   public selectedProduct: Product | null = null;
+  private url = environment.baseurl;
 
   constructor(private httpClient: HttpClient) {
       
     this.data = new Array<Product>();
     
-    const url = "http://localhost:9000/products";
+    const url = this.url + "/secure_products";
     
     this.httpClient
               .get<Array<Product>>(url)
@@ -37,9 +39,19 @@ export class ListProductsComponent implements OnInit {
 
   saveProduct(){
 
-    this.data.push(this.nProduct);
-    this.nProduct = new Product();
+    const url = this.url + "/secure_products";
+    this.httpClient
+          .post(url, this.nProduct)
+          .subscribe({
+            next: () => {
 
+              this.data.push(this.nProduct);
+              this.nProduct = new Product();
+            },
+            error: () => {
+              alert("Failed to save")
+            }
+          })
   }
 
   editProduct(product: Product){
@@ -57,12 +69,23 @@ export class ListProductsComponent implements OnInit {
 
   editUpdated(updatedProduct: Product){
 
-    const index = this.data.findIndex(item => item.id === updatedProduct.id);
-    if(index !== -1){
-      this.data[index] = updatedProduct;
-      this.selectedProduct = null;
-    }
 
+    const url = this.url + "/secure_products/" + updatedProduct.id;
+
+    this.httpClient
+            .put(url, updatedProduct)
+            .subscribe({
+              next: () => {
+                const index = this.data.findIndex(item => item.id === updatedProduct.id);
+                if(index !== -1){
+                  this.data[index] = updatedProduct;
+                  this.selectedProduct = null;
+                }
+              },
+              error: () => {
+                  alert("Failed to update");
+              }
+            })
   }
 
 }

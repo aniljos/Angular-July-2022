@@ -1,3 +1,5 @@
+import { AuthState } from '../ngrx-store/auth-reducer';
+import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
@@ -7,13 +9,25 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 })
 export class AuthGuardService implements CanActivate{
 
-  constructor(private router: Router) { }
+  private authState?: AuthState;
+  constructor(private router: Router, private store: Store<{auth: AuthState}>) { 
+
+    store
+      .select(state => state.auth)
+      .subscribe(auth => {
+          this.authState = auth;
+      })
+
+  }
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     
-    const isAuthenticated = sessionStorage.getItem("isAuthenticated");
-    if(isAuthenticated && isAuthenticated === "true"){
+    //const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+    
+    const isAuthenticated = this.authState?.isAuthenticated;
+
+    if(isAuthenticated && isAuthenticated === true){
       return true;
     }
     else{

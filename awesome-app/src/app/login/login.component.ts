@@ -1,8 +1,10 @@
+
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   public formGroup: FormGroup;
   public message: string= "";
 
-  constructor(private httpClient: HttpClient, private router: Router) { 
+  constructor(private httpClient: HttpClient, private router: Router, private store: Store) { 
 
     this.formGroup = new FormGroup({
       name: new FormControl("", [Validators.required], []),
@@ -34,18 +36,30 @@ export class LoginComponent implements OnInit {
       const password = this.formGroup.get("pwd")?.value;
 
       this.httpClient
-              .post(environment.baseurl + "/login", {name, password})
-              //.subscribe(() => {}, () => {})
+              .post<any>(environment.baseurl + "/login", {name, password})
               .subscribe({
                 next: (result) => {
                    console.log("result", result);
-                   sessionStorage.setItem("isAuthenticated", "true");
+                   //sessionStorage.setItem("isAuthenticated", "true");
+                  this.store.dispatch({type: "SET_AUTH", payload: {
+                    isAuthenticated: true,
+                    userName: name,
+                    accessToken: result.accessToken,
+                    refreshToken: result.refreshToken
+                  }});
+
                    this.router.navigateByUrl("/home");
                 },
                 error: (err) => {
                   console.log("err", err);
                   this.message = "Invalid credentials";
-                  sessionStorage.setItem("isAuthenticated", "false");
+                  //sessionStorage.setItem("isAuthenticated", "false");
+                  this.store.dispatch({type: "SET_AUTH", payload: {
+                    isAuthenticated: false,
+                    userName: "",
+                    accessToken: "",
+                    refreshToken: ""
+                  }});
                 },
                 complete: () => {}
               })
