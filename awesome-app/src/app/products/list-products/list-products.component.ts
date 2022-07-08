@@ -1,7 +1,8 @@
+import { EditProductComponent } from './../edit-product/edit-product.component';
 import { environment } from '../../../environments/environment';
 
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Product} from "../../model/product";
 
 @Component({
@@ -15,6 +16,9 @@ export class ListProductsComponent implements OnInit {
   public data: Array<Product>;
   public searchKey: string = "";
   public nProduct: Product = new Product();
+
+  @ViewChild("editProductRef")
+  public editProductComponent?:EditProductComponent;
 
   //parentProperty 
   public selectedProduct: Product | null = null;

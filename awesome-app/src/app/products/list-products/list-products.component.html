@@ -56,7 +56,7 @@
   New product(for debugging)  {{nProduct | json}}
 </div>
 
-<app-edit-product *ngIf="selectedProduct"
+<app-edit-product #editProductRef *ngIf="selectedProduct"
     [product]="selectedProduct" 
     (cancelled)="editCancelled($event)" 
     (saved)="editUpdated($event)"></app-edit-product>

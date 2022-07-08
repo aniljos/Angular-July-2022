@@ -1,3 +1,4 @@
+import { ChangeDetectionComponent, SimpleMessageComponent } from './change-detection/change-detection.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GadgetsModule } from './gadgets/gadgets.module';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: "search", component: SearchComponent, canActivate: [AuthGuardService]},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "changed", component: ChangeDetectionComponent},
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "**", component: RouteNotFoundComponent}
 ] 
@@ -37,7 +39,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, HelloComponent, DataBindingComponent, RouteNotFoundComponent, SearchComponent, LoginComponent, RegisterComponent
+    AppComponent, HelloComponent, DataBindingComponent, 
+    RouteNotFoundComponent, SearchComponent, LoginComponent, RegisterComponent,ChangeDetectionComponent, SimpleMessageComponent
   ],
   imports: [
     BrowserModule, 
