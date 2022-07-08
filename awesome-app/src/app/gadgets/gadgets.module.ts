@@ -5,6 +5,7 @@ import { ViewCartComponent } from './view-cart/view-cart.component';
 import { MainComponent } from './main/main.component';
 import {RouterModule, Routes} from '@angular/router';
 import { CartService, CartServiceImpl, MockCartServiceImpl } from './cart-service';
+import { AppShareModule } from '../app-share/app-share.module';
 
 const routes: Routes = [
   {path: "gadgets", component: MainComponent, children: [
@@ -21,7 +22,7 @@ const routes: Routes = [
     MainComponent
   ],
   imports: [
-    CommonModule, RouterModule.forChild(routes)
+    CommonModule, RouterModule.forChild(routes), AppShareModule
   ],
   providers: [
     {provide: CartService, useClass: CartServiceImpl}

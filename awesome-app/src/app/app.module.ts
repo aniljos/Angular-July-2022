@@ -19,6 +19,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { authReducer } from './ngrx-store/auth-reducer';
 import { RegisterComponent } from './register/register.component';
+import { AppShareModule } from './app-share/app-share.module';
 
 //configure the routes
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     StoreModule.forRoot({auth: authReducer}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    AppShareModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}

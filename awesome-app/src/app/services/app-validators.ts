@@ -32,7 +32,7 @@ export class AppValidators{
 
             const value = control.value;
             if(value){
-                    
+                    debugger;
                     const isValid = !values.includes(value);
                     return isValid ? null : {forbidden: "invalid"}
             }

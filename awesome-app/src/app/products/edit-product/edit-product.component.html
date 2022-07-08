@@ -11,11 +11,15 @@
             <!-- FormControl -->
             <!-- input has a name and the ngModel -->
           <input type="text" placeholder="Name" [(ngModel)]="temp.name" name="pname" 
-                        required pattern="([a-zA-Z0-9_]{1,}[ ]{0,}){0,}" #nameCtrl="ngModel"/>
+                        required pattern="([a-zA-Z0-9_]{1,}[ ]{0,}){0,}" 
+                        #nameCtrl="ngModel" [appForbiddenValidator]="'admin,mgr'"/>
         </div>
         <div *ngIf="nameCtrl.invalid" [ngStyle]="{color: 'red'}">
             This field in required and in the correct format
         </div>
+        <div *ngIf="nameCtrl.hasError('forbidden')" [ngStyle]="{color: 'red'}">
+          Forbidden Value
+      </div>
       </div>
       <div>
         <label>Price</label>

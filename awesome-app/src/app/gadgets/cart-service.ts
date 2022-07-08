@@ -52,6 +52,7 @@ export class CartServiceImpl extends CartService
 
     fetchProducts(): Promise<Array<Product>> {
 
+        alert("hello");
         const url = "http://localhost:9000/products";
 
         const result$ = this.httpClient.get<Array<Product>>(url);

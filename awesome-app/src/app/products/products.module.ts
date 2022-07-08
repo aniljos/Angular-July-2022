@@ -7,6 +7,7 @@ import { FilterPipe } from './filter.pipe';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import {RouterModule, Routes} from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
+import { AppShareModule } from '../app-share/app-share.module';
 
 const routes: Routes =[
   {path: "products", component: ListProductsComponent, canActivate:[AuthGuardService]}
@@ -18,7 +19,7 @@ const routes: Routes =[
     EditProductComponent
   ],
   imports: [
-    CommonModule, HttpClientModule, FormsModule, RouterModule.forChild(routes)
+    CommonModule, HttpClientModule, FormsModule, RouterModule.forChild(routes), AppShareModule
   ],
   exports: [
     ListProductsComponent
