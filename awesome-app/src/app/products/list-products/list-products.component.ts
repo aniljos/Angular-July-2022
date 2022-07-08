@@ -22,7 +22,7 @@ export class ListProductsComponent implements OnInit {
       
     this.data = new Array<Product>();
     
-    const url = "http://localhost:9000/secure_products";
+    const url = "http://localhost:9000/products";
     
     this.httpClient
               .get<Array<Product>>(url)
