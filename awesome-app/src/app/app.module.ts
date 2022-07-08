@@ -18,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { authReducer } from './ngrx-store/auth-reducer';
+import { RegisterComponent } from './register/register.component';
 
 //configure the routes
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: "binding", component: DataBindingComponent},
   {path: "search", component: SearchComponent, canActivate: [AuthGuardService]},
   {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent},
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "**", component: RouteNotFoundComponent}
 ] 
@@ -34,7 +36,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, HelloComponent, DataBindingComponent, RouteNotFoundComponent, SearchComponent, LoginComponent
+    AppComponent, HelloComponent, DataBindingComponent, RouteNotFoundComponent, SearchComponent, LoginComponent, RegisterComponent
   ],
   imports: [
     BrowserModule, 
